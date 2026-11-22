@@ -16,6 +16,9 @@ public class ReadingService {
     }
 
     public Reading registerReading(CreateReadingRequest createReadingRequest) {
+        if (createReadingRequest.temperature() ==null || !Double.isFinite(createReadingRequest.temperature())) {
+            throw new IllegalArgumentException("Temperature must be a finite nimber");
+        }
         Reading reading = new Reading(createReadingRequest.sensorId(), createReadingRequest.temperature(), createReadingRequest.timestamp());
         return readingRepository.save(reading);
     }
