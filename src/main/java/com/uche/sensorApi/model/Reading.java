@@ -5,7 +5,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
@@ -15,12 +14,12 @@ public class Reading {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String sensorId;
-    private BigDecimal temperature;
+    private Double temperature;
     private Instant timestamp;
 
     protected Reading(){}
 
-    public Reading(String sensorId, BigDecimal temperature, Instant timestamp) {
+    public Reading(String sensorId, Double temperature, Instant timestamp) {
         this.sensorId = sensorId;
         this.temperature = temperature;
         this.timestamp = timestamp;
@@ -34,7 +33,7 @@ public class Reading {
         return sensorId;
     }
 
-    public BigDecimal getTemperature() {
+    public Double getTemperature() {
         return temperature;
     }
 

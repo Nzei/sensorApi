@@ -10,7 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.math.BigDecimal;
 import java.time.Instant;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +30,7 @@ public class ReadingServiceTest {
 
     @BeforeEach
     void setUp() {
-        createReadingRequest = new CreateReadingRequest("readingSensor1", new BigDecimal(10), Instant.parse("2026-11-22T15:14:00Z"));
+        createReadingRequest = new CreateReadingRequest("readingSensor1", 10.0, Instant.parse("2026-11-22T15:14:00Z"));
     }
 
     @Test
@@ -41,7 +40,7 @@ public class ReadingServiceTest {
         Reading readingResult = readingService.registerReading(createReadingRequest);
 
         assertEquals("readingSensor1", readingResult.getSensorId());
-        assertEquals(new BigDecimal(10), readingResult.getTemperature());
+        assertEquals(10.0, readingResult.getTemperature());
         assertEquals(Instant.parse("2026-11-22T15:14:00Z"), readingResult.getTimestamp());
 
         verify(readingRepository).save(any(Reading.class));
